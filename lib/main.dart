@@ -4,8 +4,20 @@ import 'package:appjamoua/view/myword_page.dart';
 import 'package:appjamoua/view/test_page.dart';
 import 'package:appjamoua/view/true_page.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+
+  //Initialize Hive
+  await Hive.initFlutter();
+
+  // Init the dict. - Buradakiler 3 databaseimizin cagrilmasi.
+  await Hive.openBox('trueBox');
+  await Hive.openBox('falseBox');
+  await Hive.openBox('myBox');
+
+
   runApp(const HomePage());
 }
 

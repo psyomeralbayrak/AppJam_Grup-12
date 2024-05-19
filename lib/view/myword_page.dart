@@ -1,5 +1,6 @@
 import 'package:appjamoua/models_widget/word_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class MyWordPage extends StatefulWidget {
   const MyWordPage({super.key});
@@ -20,6 +21,9 @@ class _MyWordPageState extends State<MyWordPage> {
     MyWords.addAll([
       'Kelime 1', 'Kelime 2',
     ]);
+
+    // Kendi kelimelerim datasini cagirdik.
+    var falseBox = Hive.box("myBox");
   }
 
   @override

@@ -1,5 +1,5 @@
-import 'package:appjamoua/models_widget/background_widget.dart';
 import 'package:flutter/material.dart';
+import 'background_widget.dart';
 
 class WordListWidget extends StatelessWidget {
   const WordListWidget({super.key, required this.WordList,});
@@ -29,7 +29,8 @@ class WordListWidget extends StatelessWidget {
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               itemCount: WordList.length,
-              itemBuilder: (context, index) => _buildButton(WordList[index]),
+              itemBuilder: (context, index) => _buildButton(context, WordList[index]),
+
             ),
           ),
         ],
@@ -37,11 +38,13 @@ class WordListWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(String text) {
+  Widget _buildButton(BuildContext context, String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: () {
+          _showAlertDialog(context, text);
+        },
         style: OutlinedButton.styleFrom(
           backgroundColor: Color.fromRGBO(181, 193, 142, 1),
           side: const BorderSide(color: Colors.black), // Beyaz kenar çizgisi
@@ -58,5 +61,24 @@ class WordListWidget extends StatelessWidget {
       ),
     );
   }
-  }
 
+  void _showAlertDialog(BuildContext context, String text) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(text, textAlign: TextAlign.center),
+          content: Text("api den gelen cümle"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // AlertDialog'u kapat
+              },
+              child: Text('Kapat'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

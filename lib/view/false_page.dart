@@ -1,5 +1,6 @@
 import 'package:appjamoua/models_widget/word_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class FalsePage extends StatefulWidget {
   const FalsePage({super.key});
@@ -22,6 +23,9 @@ class _FalsePageState extends State<FalsePage> {
       'Kelime 5', 'Kelime 6', 'Kelime 7', 'Kelime 8',
       'Kelime 9',
     ]);
+
+    // Yanlis datayi cagirdik.
+    var falseBox = Hive.box("falseBox");
   }
 
   @override

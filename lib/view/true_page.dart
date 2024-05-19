@@ -1,5 +1,6 @@
 import 'package:appjamoua/models_widget/word_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class TruePage extends StatefulWidget {
   const TruePage({super.key});
@@ -22,6 +23,9 @@ class _TruePageState extends State<TruePage> {
       'Kelime 5', 'Kelime 6', 'Kelime 7', 'Kelime 8',
       'Kelime 9', 'Kelime 10', 'Kelime 11'
     ]);
+
+    // Dogru datayi cagirdik.
+    var trueBox = Hive.box("trueBox");
   }
 
   @override

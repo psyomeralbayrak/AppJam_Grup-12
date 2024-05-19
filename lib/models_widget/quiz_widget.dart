@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 
-class QuizWidget extends StatelessWidget {
+class QuizWidget extends StatefulWidget {
+  const QuizWidget({super.key, required this.Question, required this.Answer1, required this.Answer2, required this.Answer3, required this.Answer4, });
+  final String Question;
+  final String Answer1;
+  final String Answer2;
+  final String Answer3;
+  final String Answer4;
+
+  @override
+  State<QuizWidget> createState() => _QuizWidgetState();
+}
+
+class _QuizWidgetState extends State<QuizWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +30,7 @@ class QuizWidget extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  'Buraya soru gelecek',
+                  " '${widget.Question}' kelimesinin anlamı nedir?",
                   style: TextStyle(color: Colors.black), // Metin rengi siyah
                 ),
               ),
@@ -39,7 +51,7 @@ class QuizWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0), // Buton kenarlarını ovalleştirme
                   ),
                 ),
-                child: Text('Answer 1'),
+                child: Text(widget.Answer1),
               ),
             ),
             SizedBox(height: 12),
@@ -58,7 +70,7 @@ class QuizWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: Text('Answer 2'),
+                child: Text(widget.Answer2),
               ),
             ),
 
@@ -80,7 +92,7 @@ class QuizWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: Text('Answer 3'),
+                child: Text(widget.Answer3),
               ),
             ),
             SizedBox(
@@ -100,7 +112,7 @@ class QuizWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: Text('Answer 4'),
+                child: Text(widget.Answer4),
               ),
             ),
           ],
