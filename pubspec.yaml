@@ -30,6 +30,7 @@ environment:
 dependencies:
   hive:
   hive_flutter:
+  flutter_gemini:
   flutter:
     sdk: flutter
 

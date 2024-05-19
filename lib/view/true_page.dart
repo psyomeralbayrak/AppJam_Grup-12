@@ -19,7 +19,7 @@ class _TruePageState extends State<TruePage> {
     super.initState();
     // Oxford 3000'den gelen kelimeleri karşılayacak liste
     trueWords.addAll([
-      'Kelime 1', 'Kelime 2', 'Kelime 3', 'Kelime 4',
+      'Tree', 'Kelime 2', 'Kelime 3', 'Kelime 4',
       'Kelime 5', 'Kelime 6', 'Kelime 7', 'Kelime 8',
       'Kelime 9', 'Kelime 10', 'Kelime 11'
     ]);

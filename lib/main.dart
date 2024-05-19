@@ -4,8 +4,11 @@ import 'package:appjamoua/view/myword_page.dart';
 import 'package:appjamoua/view/test_page.dart';
 import 'package:appjamoua/view/true_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'model/gemini_client.dart';
 
 void main() async {
 
@@ -17,6 +20,29 @@ void main() async {
   await Hive.openBox('falseBox');
   await Hive.openBox('myBox');
 
+  // Asagida yoksa ekledim. Dilerseniz silebilirsiniz.
+  var trueBox = Hive.box("trueBox");
+  if (trueBox.isEmpty == true) {
+    trueBox.put("true", []);
+    print("True'ya eklendi");
+  }
+  //trueBox.putAt(0, []);
+  //print(trueBox.getAt(0));
+
+  var falseBox = Hive.box("falseBox");
+  if (falseBox.isEmpty == true) {
+    falseBox.put("false", []);
+    print("False'a eklendi");
+  }
+
+  var myBox = Hive.box("myBox");
+  if (myBox.isEmpty == true) {
+    myBox.put("my", []);
+    print("Mywords'e eklendi");
+  }
+
+  //init Gemini
+  Gemini.init(apiKey: geminiApiKey);
 
   runApp(const HomePage());
 }

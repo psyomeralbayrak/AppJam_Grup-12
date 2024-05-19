@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 class QuizWidget extends StatefulWidget {
-  const QuizWidget({super.key, required this.Question, required this.Answer1, required this.Answer2, required this.Answer3, required this.Answer4, });
+  QuizWidget({super.key, required this.Question, required this.Answer1, required this.Answer2, required this.Answer3, required this.Answer4, required this.Function1, required this.Function2, required this.Function3, required this.Function4, });
   final String Question;
   final String Answer1;
   final String Answer2;
   final String Answer3;
   final String Answer4;
+  final VoidCallback Function1;
+  final VoidCallback Function2;
+  final VoidCallback Function3;
+  final VoidCallback Function4;
 
   @override
   State<QuizWidget> createState() => _QuizWidgetState();
@@ -31,7 +35,8 @@ class _QuizWidgetState extends State<QuizWidget> {
               child: Center(
                 child: Text(
                   " '${widget.Question}' kelimesinin anlamı nedir?",
-                  style: TextStyle(color: Colors.black), // Metin rengi siyah
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: 36, fontWeight: FontWeight.bold,), // Metin rengi siyah
                 ),
               ),
             ),
@@ -41,7 +46,7 @@ class _QuizWidgetState extends State<QuizWidget> {
               width: 335,
               height: 55, // Buton yüksekliği 55 piksel
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => widget.Function1(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black, // Buton üzerindeki metin rengi siyah
@@ -51,7 +56,7 @@ class _QuizWidgetState extends State<QuizWidget> {
                     borderRadius: BorderRadius.circular(10.0), // Buton kenarlarını ovalleştirme
                   ),
                 ),
-                child: Text(widget.Answer1),
+                child: Text(widget.Answer1, style: TextStyle(fontSize: 18),),
               ),
             ),
             SizedBox(height: 12),
@@ -60,7 +65,7 @@ class _QuizWidgetState extends State<QuizWidget> {
               width: 335,
               height: 55, // Buton yüksekliği 55 piksel
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => widget.Function2(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
@@ -70,7 +75,7 @@ class _QuizWidgetState extends State<QuizWidget> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: Text(widget.Answer2),
+                child: Text(widget.Answer2, style: TextStyle(fontSize: 18),),
               ),
             ),
 
@@ -82,7 +87,7 @@ class _QuizWidgetState extends State<QuizWidget> {
               width: 335,
               height: 55, // Buton yüksekliği 55 piksel
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => widget.Function3(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
@@ -92,7 +97,7 @@ class _QuizWidgetState extends State<QuizWidget> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: Text(widget.Answer3),
+                child: Text(widget.Answer3, style: TextStyle(fontSize: 18),),
               ),
             ),
             SizedBox(
@@ -102,7 +107,7 @@ class _QuizWidgetState extends State<QuizWidget> {
               width: 335,
               height: 55, // Buton yüksekliği 55 piksel
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => widget.Function4(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
@@ -112,7 +117,7 @@ class _QuizWidgetState extends State<QuizWidget> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: Text(widget.Answer4),
+                child: Text(widget.Answer4, style: TextStyle(fontSize: 18),),
               ),
             ),
           ],

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:appjamoua/models_widget/background_widget.dart';
 import 'package:appjamoua/models_widget/quiz_widget.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +37,10 @@ class _TestPageState extends State<TestPage> {
 
   }
 
-  final int CurrentIndex = 0;
+  // var for index
+  int CurrentIndex = 0;
+  // var for true or false
+  int isTrue = 1;
 
   // Creating random index in every time
   List <int> wordIndex = [];
@@ -67,6 +72,65 @@ class _TestPageState extends State<TestPage> {
     print(answerIndexs[0]);
   }
 
+  //Function that check the response
+  void checkResponse (int response) {
+    if (wordIndex[CurrentIndex] == answerIndexs[response]) {
+      setState(() {
+        print("Dogru bildin!");
+        isTrue = 2;
+        addOne();
+      });
+    }
+    else {
+      setState(() {
+        print("Yanlis bildin");
+        isTrue = 3;
+        addOne();
+      });
+
+    }
+  }
+
+  void addOne () async{
+    await Future.delayed(const Duration(seconds: 1));
+
+    setState(() {
+      CurrentIndex += 1;
+      createAnswer(wordIndex[CurrentIndex]);
+      isTrue = 1;
+    });
+  }
+
+  List<Widget> mywidgets = [
+    Center(
+      child: Padding(child: Text(
+          '',
+      ), padding: EdgeInsets.only(top: 10),),
+    ),
+    Center(
+      child: Padding(child: Text(
+          'Doğru!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
+      ), padding: EdgeInsets.only(top: 10),),
+    ),
+    Center(
+      child: Padding(child: Text(
+          'Yanlış!' , style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red)
+      ), padding: EdgeInsets.only(top: 10),),
+    ),
+  ];
+
+  Widget ResponseWidget() {
+    if (isTrue == 1) {
+      return mywidgets[0];
+    }
+    else if (isTrue == 2) {
+      return mywidgets[1];
+    }
+    else {
+      return mywidgets[2];
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +143,33 @@ class _TestPageState extends State<TestPage> {
 
       body: BackgroundWidget(
 
-          MainWidget: QuizWidget(
-            Question: oxford3000.keys.elementAt(wordIndex[CurrentIndex]),
-            Answer1: oxford3000.values.elementAt(answerIndexs[0]),
-            Answer2: oxford3000.values.elementAt(answerIndexs[1]),
-            Answer3: oxford3000.values.elementAt(answerIndexs[2]),
-            Answer4: oxford3000.values.elementAt(answerIndexs[3]),
+          MainWidget: Column(
+            children: [
+
+              ResponseWidget(),
+
+              QuizWidget(
+                Question: oxford3000.keys.elementAt(wordIndex[CurrentIndex]),
+                Answer1: oxford3000.values.elementAt(answerIndexs[0]),
+                Answer2: oxford3000.values.elementAt(answerIndexs[1]),
+                Answer3: oxford3000.values.elementAt(answerIndexs[2]),
+                Answer4: oxford3000.values.elementAt(answerIndexs[3]),
+                Function1: () {
+                  checkResponse(0);
+                },
+                Function2: () {
+                  checkResponse(1);
+                },
+                Function3: () {
+                  checkResponse(2);
+                },
+                Function4: () {
+                  checkResponse(3);
+                },
+              ),
+
+
+            ]
           )
 
       ),
