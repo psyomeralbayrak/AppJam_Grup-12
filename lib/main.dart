@@ -19,6 +19,7 @@ void main() async {
   await Hive.openBox('trueBox');
   await Hive.openBox('falseBox');
   await Hive.openBox('myBox');
+  await Hive.openBox<int>('progressBox');
 
   // Asagida yoksa ekledim. Dilerseniz silebilirsiniz.
   var trueBox = Hive.box("trueBox");
@@ -66,9 +67,9 @@ class HomePage extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color.fromRGBO(199, 183, 163,2),
-          primary: Color.fromRGBO(199, 183, 163,1),
-
+          primary: Color.fromRGBO(208, 191, 254, 1.0),
         ),
+        fontFamily: "Open Sans",
         useMaterial3: true,
       ),
     );
@@ -87,13 +88,18 @@ final List<int> colorCodes = <int>[200, 300, 400, 500];
 final List<String> NavigationNames = ["/testpage","/truepage","/falsepage","/mywordspage"];
 
 class _MyHomePageState extends State<MyHomePage> {
+  List renk = [
+    [229,221,252], [198,245,222], [248,218,220], [247,228,206],
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text("App Jam Group 12"),
+        centerTitle: true,
+        title: Text("WordMaster", style: TextStyle(fontWeight: FontWeight.bold),),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 3),
@@ -114,11 +120,14 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.of(context).pushNamed(NavigationNames[index]);
               },
-              child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: Color.fromRGBO(181, 193, 142, 1),),
-                //Colors.lightGreen[colorCodes[index]]
-                height: 180,
-                child: Center(child: Text('${entries[index]}',style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),)),
+              child: Padding(
+                padding: EdgeInsets.only(top: 35),
+                child: Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: Color.fromRGBO(renk[index][0], renk[index][1], renk[index][2], 1),),
+                  //Colors.lightGreen[colorCodes[index]]
+                  height: 120,
+                  child: Center(child: Text('${entries[index]}',style: TextStyle(fontSize: 35),)),
+                ),
               ),
             );
           },

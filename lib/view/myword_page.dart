@@ -19,11 +19,11 @@ class _MyWordPageState extends State<MyWordPage> {
     super.initState();
     // Oxford 3000'den gelen kelimeleri karşılayacak liste
     MyWords.addAll([
-      'Kelime 1', 'Kelime 2',
+      'Significant', 'Obstacle',
     ]);
 
     // Kendi kelimelerim datasini cagirdik.
-    var falseBox = Hive.box("myBox");
+    Hive.box("myBox");
   }
 
   @override
@@ -32,7 +32,7 @@ class _MyWordPageState extends State<MyWordPage> {
 
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text("Kelimelerim"),
+        title: const Text("Kelimelerim", style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
         actions: [
           Padding(
@@ -45,6 +45,6 @@ class _MyWordPageState extends State<MyWordPage> {
         ],
       ),
 
-      body: WordListWidget(WordList: MyWords),);
+      body: WordListWidget(WordList: MyWords, renk: Color.fromRGBO(247,228,206,1),),);
   }
 }

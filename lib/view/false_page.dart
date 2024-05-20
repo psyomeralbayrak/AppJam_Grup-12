@@ -1,6 +1,6 @@
-import 'package:appjamoua/models_widget/word_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:appjamoua/models_widget/word_list_widget.dart';
 
 class FalsePage extends StatefulWidget {
   const FalsePage({super.key});
@@ -10,34 +10,24 @@ class FalsePage extends StatefulWidget {
 }
 
 class _FalsePageState extends State<FalsePage> {
-
-  // Örnek doğru bilinen kelimeler listesi
   List<String> falseWords = [];
 
   @override
   void initState() {
     super.initState();
-    // Oxford 3000'den gelen kelimeleri karşılayacak liste
-    falseWords.addAll([
-      'Kelime 1', 'Kelime 2', 'Kelime 3', 'Kelime 4',
-      'Kelime 5', 'Kelime 6', 'Kelime 7', 'Kelime 8',
-      'Kelime 9',
-    ]);
-
-    // Yanlis datayi cagirdik.
     var falseBox = Hive.box("falseBox");
+    falseWords = falseBox.get('falseList', defaultValue: <String>[])?.cast<String>() ?? [];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text("Bilemediğim Kelimeler"),
+        title: Text("Bilemediğim Kelimeler",  style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
-
-      body: WordListWidget(WordList: falseWords),);
+      body: WordListWidget(WordList: falseWords, renk: Color.fromRGBO(248,218,220,1),),
+    );
   }
 }

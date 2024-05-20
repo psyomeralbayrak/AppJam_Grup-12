@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'background_widget.dart';
 
-class WordListWidget extends StatelessWidget {
-  const WordListWidget({super.key, required this.WordList,});
+class WordListWidget extends StatefulWidget {
+  const WordListWidget({super.key, required this.WordList, required this.renk,});
   final List <String> WordList;
+  final Color renk;
 
+  @override
+  State<WordListWidget> createState() => _WordListWidgetState();
+}
+
+class _WordListWidgetState extends State<WordListWidget> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
@@ -17,7 +23,7 @@ class WordListWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 32),
                 child: Text(
-                  "Kelime sayısı: ${WordList.length}",
+                  "Kelime sayısı: ${widget.WordList.length}",
                   style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -29,8 +35,8 @@ class WordListWidget extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              itemCount: WordList.length,
-              itemBuilder: (context, index) => _buildButton(context, WordList[index]),
+              itemCount: widget.WordList.length,
+              itemBuilder: (context, index) => _buildButton(context, widget.WordList[index]),
 
             ),
           ),
@@ -47,7 +53,7 @@ class WordListWidget extends StatelessWidget {
           _showAlertDialog(context, text);
         },
         style: OutlinedButton.styleFrom(
-          backgroundColor: Color.fromRGBO(181, 193, 142, 1),
+          backgroundColor: widget.renk,
           side: const BorderSide(color: Colors.black),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: const TextStyle(fontSize: 18,),

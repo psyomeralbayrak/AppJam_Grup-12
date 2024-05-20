@@ -1,6 +1,6 @@
-import 'package:appjamoua/models_widget/word_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:appjamoua/models_widget/word_list_widget.dart';
 
 class TruePage extends StatefulWidget {
   const TruePage({super.key});
@@ -10,34 +10,24 @@ class TruePage extends StatefulWidget {
 }
 
 class _TruePageState extends State<TruePage> {
-
-  // Örnek doğru bilinen kelimeler listesi
   List<String> trueWords = [];
 
   @override
   void initState() {
     super.initState();
-    // Oxford 3000'den gelen kelimeleri karşılayacak liste
-    trueWords.addAll([
-      'Tree', 'Kelime 2', 'Kelime 3', 'Kelime 4',
-      'Kelime 5', 'Kelime 6', 'Kelime 7', 'Kelime 8',
-      'Kelime 9', 'Kelime 10', 'Kelime 11'
-    ]);
-
-    // Dogru datayi cagirdik.
     var trueBox = Hive.box("trueBox");
+    trueWords = trueBox.get('trueList', defaultValue: <String>[])?.cast<String>() ?? [];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text("Doğru Bildiğim Kelimeler"),
+        title: const Text("Doğru Bildiğim Kelimeler",  style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
-
-      body: WordListWidget(WordList: trueWords),);
-}
+      body: WordListWidget(WordList: trueWords, renk: Color.fromRGBO(198,245,222,1),),
+    );
+  }
 }
